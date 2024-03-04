@@ -15,6 +15,6 @@ R8( ) -----> R9( ) -----> R10( ) -----> R11( ) -----> R12( ) -----> R13( );
 
 
 
-Countdown até entrega: (dias);
-Data de entrega do projeto:  /  / ;
-Data de apresentação do projeto:  /  / ;
+.Countdown até entrega: (dias);
+.Data de entrega do projeto:  /  / ;
+.Data de apresentação do projeto:  /  / ;
