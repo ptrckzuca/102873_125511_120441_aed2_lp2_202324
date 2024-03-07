@@ -28,8 +28,8 @@ Objetivos a serem cumpridos.
 
 
 - **Countdown até entrega: (dias)**;
-- **Data de entrega do projeto:  /  / **;
-- **Data de apresentação do projeto:  /  / **;
+- **Data de entrega do projeto:**;
+- **Data de apresentação do projeto:**;
 
 
 
