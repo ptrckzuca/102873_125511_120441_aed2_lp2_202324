@@ -1,6 +1,7 @@
 **102873_125511_120441_aed2_lp2_202324**
 # Digital Bibliography UFP project.
-Alunos: - **Patrick Silva** (2022102873);
+## Alunos: 
+- **Patrick Silva** (2022102873);
 - **Frederico Soliz** (2022125511);
 - **João Nunes** (2022120441);
 
