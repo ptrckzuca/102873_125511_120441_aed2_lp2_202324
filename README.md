@@ -8,7 +8,7 @@
 Objetivos a serem cumpridos.
 ## MILESTONE 1:
 
-- [ ] R1; 
+- [ ] R1; esboço do UML já realizado
 - [ ] R2; 
 - [ ] R3;  
 - [ ] R4; 
