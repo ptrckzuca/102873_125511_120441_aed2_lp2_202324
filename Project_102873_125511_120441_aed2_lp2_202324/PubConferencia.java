@@ -1,45 +1,45 @@
 package Project_102873_125511_120441_aed2_lp2_202324;
 
-import java.util.Objects;
+
+import java.util.Date;
 
 public class PubConferencia extends Publicacao {
 
-  private String nome;
+  private Date dataInicio;
+  private Date dataFim;
+  private String local;
 
-  public String getNome() {
-    return nome;
-  }
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
-
-
-  public PubConferencia(String nome, String publisher, int ano, String periodicidade, double jcrIF, double scopusIF) {
-    super(nome, publisher, ano, periodicidade, jcrIF, scopusIF);
+  public PubConferencia(String publisher, int ano, String nome, Date dataInicio, Date dataFim, String local) {
+    super(publisher, ano, nome);
+    this.dataInicio = dataInicio;
+    this.dataFim = dataFim;
+    this.local = local;
   }
 
-
-  @Override
-  public String toString() {
-    return "PubConferencia{" +
-            "nome='" + nome + '\'' +
-            '}';
+  public Date getDataInicio() {
+    return dataInicio;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PubConferencia that)) return false;
-    if (!super.equals(o)) return false;
-      return Objects.equals(nome, that.nome);
+  public void setDataInicio(Date dataInicio) {
+    this.dataInicio = dataInicio;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), nome);
+  public Date getDataFim() {
+    return dataFim;
+  }
+
+  public void setDataFim(Date dataFim) {
+    this.dataFim = dataFim;
+  }
+
+  public String getLocal() {
+    return local;
+  }
+
+  public void setLocal(String local) {
+    this.local = local;
   }
 
   public void publicarConferencia(Artigo artigo, int ano, int numeroEdicao, String local) {
-
   }
 }
