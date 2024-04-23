@@ -1,6 +1,6 @@
 package Project_102873_125511_120441_aed2_lp2_202324;
 
-public class PubJournal extends Publicacao {
+public class PubJournal extends Publication {
 
   private double jcrIF;
   private double scopusIF;
@@ -58,6 +58,6 @@ public class PubJournal extends Publicacao {
     this.series = series;
   }
 
-  public void publicarJournal(Artigo artigo, int ano, String publisher) {
+  public void publicarJournal(Article article, int ano, String publisher) {
   }
 }

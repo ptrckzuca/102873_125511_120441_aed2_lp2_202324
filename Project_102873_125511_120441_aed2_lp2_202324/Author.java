@@ -8,8 +8,8 @@ import java.util.Objects;
 public class Author extends Person {
 
   private String orcid;
-  private String filiacao;
   private int CienciaID;
+  private String filiacao;
   private int GoogleScholarID;
   private String nomeCientifico;
   private String email;
