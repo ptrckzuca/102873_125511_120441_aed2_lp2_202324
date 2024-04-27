@@ -17,6 +17,7 @@ public class Publication {
   }
 
 
+
   public String getPublisher() {
     return publisher;
   }
