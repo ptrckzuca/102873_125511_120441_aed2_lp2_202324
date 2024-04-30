@@ -1,10 +1,12 @@
 package Project_102873_125511_120441_aed2_lp2_202324;
+
 import edu.princeton.cs.algs4.ST;
 import Project_102873_125511_120441_aed2_lp2_202324.Author;
 import edu.ufp.inf.lp2.p01_intro.Date;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static edu.princeton.cs.algs4.StdOut.print;
 import static edu.princeton.cs.algs4.StdOut.println;
@@ -14,6 +16,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI {
     private ST<Integer, Author> authors;
     private ST<String, Article> articles;
 
+    private ArrayList<Publication> publications = new ArrayList<>();
 
 
     public DB() {
@@ -22,6 +25,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI {
 
         articles = new ST<>();
         Article article = new Article();
+
 
     }
 
@@ -67,6 +71,13 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI {
         articles.delete(article.getTitulo());
         return article;
     }
+
+    public void listArticleStats(Article article) {
+        System.out.println("Article: " + article.getTitulo());
+        System.out.println("Number of Downloads: " + article.getNumDownloads());
+        System.out.println("Number of Views: " + article.getNumViews());
+        System.out.println("Number of Likes: " + article.getNumLikes());
+    }
     public Article listArticles() {
         for (String key : articles.keys()) {
             System.out.println(articles.get(key));
@@ -75,10 +86,22 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI {
     }
 
 
+    public void addPublication(Publication publication) {
+        publications.add(publication);
+    }
 
 
-    public static void main(String[] args) {
-        DB db = new DB();
+    public void removePublication(Publication publication) {
+        publications.remove(publication);
+    }
+
+    public void listPublications() {
+        for (Publication publication : publications) {
+            System.out.println(publication.toString());
+        }
+    }
+
+    static void testAuthor (DB db){
 
         Author a1 = new Author("12", "Joao Castro Silva", "Rua Santo Antonio", new Date((short) 12, (short) 6, 1973), "  joaosilva@gmail.com  ", "10", "EXECX", 1, 1, "Joao Silva");
         Author a2 = new Author("27", "Jose Fernandes Tomas", "Praça dos Combatentes", new Date((short) 9, (short) 12, 1994), "  josefernandes@gmail.com  ", "20", "LAB33", 2, 1, "Jose Fernandes");
@@ -97,21 +120,70 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI {
         db.removeAuthor(a1);
         db.listAuthors();
 
+    }
 
-         /*
-        Article article1 = new Article("Artigo 1", 1, "Abstract 1", 2021, 1, 1, 1, new Publication(), null, null);
-        Article article2 = new Article("Artigo 2", 2, "Abstract 2", 2022, 2, 2, 2, new Publication(), null, null);
-        Article article3 = new Article("Artigo 3", 3, "Abstract 3", 2023, 3, 3, 3, new Publication(), null, null);
+    static void testPublication (DB db){
+        Publication conference1 = new PubConference("IEEE", 2023, "IEEE Computer Vision and Pattern Recognition", new Date((short) 18, (short) 6, 2023), new Date((short) 22, (short) 6, 2023), "Vancouver");
+        Publication conference2 = new PubConference("Springer", 2024, "European Conference on Computer Vision", new Date((short) 29, (short) 9, 2024), new Date((short) 4, (short) 10, 2024), "Milan");
+        Publication journal1 = new PubJournal("IEEE", 2024, "IEEE Transactions on Pattern Analysis and Machine Intelligence", 1.2, 1.3, "Monthly", 3, 8);
+        Publication journal2 = new PubJournal("ELSEVIER", 2024, "Future Generation Computer Systems", 1.9, 1.6, "Bimonthly", 2, 5);
+
+        db.addPublication(conference1);
+        db.addPublication(conference2);
+        db.addPublication(journal1);
+        db.addPublication(journal2);
+
+        db.listPublications();
+
+        db.removePublication(conference1);
+
+        println("");
+
+        db.listPublications();
+    }
+
+    static void testArticle (DB db){
+
+        Publication conference1 = new PubConference("IEEE", 2023, "IEEE Computer Vision and Pattern Recognition", new Date((short) 18, (short) 6, 2023), new Date((short) 22, (short) 6, 2023), "Vancouver");
+        Publication conference2 = new PubConference("Springer", 2024, "European Conference on Computer Vision", new Date((short) 29, (short) 9, 2024), new Date((short) 4, (short) 10, 2024), "Milan");
+        Publication journal1 = new PubJournal("IEEE", 2024, "IEEE Transactions on Pattern Analysis and Machine Intelligence", 1.2, 1.3, "Monthly", 3, 8);
+        Publication journal2 = new PubJournal("ELSEVIER", 2024, "Future Generation Computer Systems", 1.9, 1.6, "Bimonthly", 2, 5);
+
+        db.addPublication(conference1);
+        db.addPublication(conference2);
+        db.addPublication(journal1);
+        db.addPublication(journal2);
+
+        Article article1 = new Article("Artigo 1", 45, "Abstract 1", 2021, 2355, 34553, 13897, journal1, null, null);
+        Article article2 = new Article("Artigo 2", 20, "Abstract 2", 2022, 5544, 67432, 19087, conference2, null, null);
+        Article article3 = new Article("Artigo 3", 33, "Abstract 3", 2023, 10008, 102234, 35648, conference1, null, null);
+        Article article4 = new Article("Artigo 3", 17, "Abstract 4", 2023, 456, 7895, 1263, journal2, null, null);
 
         db.addArticle(article1);
         db.addArticle(article2);
         db.addArticle(article3);
-
-
-        db.removeArticle(article1);
+        db.addArticle(article4);
 
         db.listArticles();
-        */
+
+        println("");
+
+        db.listArticleStats(article1);
+    }
+
+
+    public static void main(String[] args) {
+        DB db = new DB();
+
+        //testAuthor(db);
+        testArticle(db);
+        //testPublication(db);
+
+
+
+
+
+
     }
 
 }

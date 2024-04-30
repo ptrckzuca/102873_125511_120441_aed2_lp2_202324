@@ -1,7 +1,9 @@
 package Project_102873_125511_120441_aed2_lp2_202324;
 
 
-import java.util.Date;
+//import java.util.Date;
+
+import edu.ufp.inf.lp2.p01_intro.Date;
 
 public class PubConference extends Publication {
 
@@ -41,5 +43,14 @@ public class PubConference extends Publication {
   }
 
   public void publicarConferencia(Article article, int ano, int numeroEdicao, String local) {
+  }
+
+  @Override
+  public String toString() {
+    return "PubConference{" +
+            "dataInicio=" + dataInicio +
+            ", dataFim=" + dataFim +
+            ", local='" + local + '\'' +
+            '}';
   }
 }

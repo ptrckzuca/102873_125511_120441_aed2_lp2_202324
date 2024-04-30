@@ -110,4 +110,20 @@ public class Article {
     public void setAutores(ArrayList<Author> autores) {
         this.autores = autores;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "titulo='" + titulo + '\'' +
+                ", keyWords=" + keyWords +
+                ", Abstract='" + Abstract + '\'' +
+                ", ano=" + ano +
+                ", numDownloads=" + numDownloads +
+                ", numViews=" + numViews +
+                ", numLikes=" + numLikes +
+                ", pub=" + pub +
+                ", referencias=" + referencias +
+                ", autores=" + autores +
+                '}';
+    }
 }

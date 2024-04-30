@@ -60,4 +60,15 @@ public class PubJournal extends Publication {
 
   public void publicarJournal(Article article, int ano, String publisher) {
   }
+
+  @Override
+  public String toString() {
+    return "PubJournal{" +
+            "jcrIF=" + jcrIF +
+            ", scopusIF=" + scopusIF +
+            ", periodicidade='" + periodicidade + '\'' +
+            ", volume=" + volume +
+            ", series=" + series +
+            '}';
+  }
 }

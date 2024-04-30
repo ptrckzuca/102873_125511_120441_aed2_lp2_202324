@@ -5,4 +5,5 @@ public interface DBManageAuthorsI {
     public Author getAuthor(int cienciaID);
     public Author removeAuthor(Author author);
     public Author listAuthors();
+    public void archiveAuthor(String data);
     }
