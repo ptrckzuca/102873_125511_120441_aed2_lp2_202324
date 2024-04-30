@@ -8,12 +8,12 @@
 Objetivos a serem cumpridos.
 ## MILESTONE 1:
 
-- [ ] R1; UML e código feitos
-- [ ] R2; 
+- [x] R1; UML e código feitos
+- [x] R2; 
 - [ ] R3;  
 - [ ] R4; 
-- [ ] R5;  
-- [ ] R6;
+- [x] R5;  
+- [x] R6;
 - [ ] R7;
 
 ## MILESTONE 2:
