@@ -10,7 +10,7 @@ Objetivos a serem cumpridos.
 
 - [x] R1; UML e código feitos
 - [x] R2; 
-- [ ] R3;  
+- [x] R3;  
 - [ ] R4; 
 - [x] R5;  
 - [x] R6;
