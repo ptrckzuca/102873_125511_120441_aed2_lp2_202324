@@ -4,7 +4,7 @@ public interface DBManageArticlesI {
     public Article addArticle(Article article);
     public Article getArticle(String titulo);
     public Article removeArticle(Article article);
-
+    public void archiveArticle(String data);
     public void listArticleStats(Article article);
     public Article listArticles();
 }

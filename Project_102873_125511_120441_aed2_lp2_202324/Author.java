@@ -5,7 +5,7 @@ import edu.ufp.inf.lp2.p01_intro.Person;
 
 import java.util.Objects;
 
-public class Author extends Person {
+public class Author extends Person  {
 
   private String orcid;
   private int CienciaID;

@@ -3,7 +3,7 @@ package Project_102873_125511_120441_aed2_lp2_202324;
 
 import java.util.ArrayList;
 
-public class Article {
+public class Article{
 
     private String titulo;
     private int keyWords;
@@ -17,6 +17,7 @@ public class Article {
     private ArrayList<Author> autores;
 
     public Article() {
+
     }
     public Article(String titulo, Integer keyWords, String anAbstract, int ano, int numDownloads, int numViews, int numLikes, Publication pub, ArrayList<Article> referencias, ArrayList<Author> autores) {
         this.titulo = titulo;
