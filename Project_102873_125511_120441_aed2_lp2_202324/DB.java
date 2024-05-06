@@ -1,29 +1,36 @@
 package Project_102873_125511_120441_aed2_lp2_202324;
 
+
 import edu.princeton.cs.algs4.RedBlackBST;
 import edu.princeton.cs.algs4.ST;
-import Project_102873_125511_120441_aed2_lp2_202324.Author;
 import edu.ufp.inf.lp2.p01_intro.Date;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
 
-import static edu.princeton.cs.algs4.StdOut.print;
 import static edu.princeton.cs.algs4.StdOut.println;
 
 
-
-public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicationsI{
+public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicationsI {
     private ST<Integer, Author> authors;
-    private ArrayList<Author> authorsList = new ArrayList<>();
+    private ArrayList<Author> authorsArticle1 = new ArrayList<>();
+    private ArrayList<Author> authorsArticle2 = new ArrayList<>();
+    private ArrayList<Author> authorsArticle3 = new ArrayList<>();
+    private ArrayList<Author> authorsArticle4 = new ArrayList<>();
+    private ArrayList<Author> authorsArticle5 = new ArrayList<>();
+    private ArrayList<Author> authorsArticle6 = new ArrayList<>();
+    private ArrayList<Author> authorsArticle7 = new ArrayList<>();
     private ST<String, Article> articles;
     private ArrayList<Publication> publications;
-    private RedBlackBST <Integer, Article> articlesByYear;
-
+    private RedBlackBST<Integer, Article> articlesByYear;
 
 
     public DB() {
+
         articlesByYear = new RedBlackBST<>();
 
         authors = new ST<>();
@@ -56,12 +63,13 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         addPublication(journal1);
         addPublication(journal2);
 
-        Article article1 = new Article("Artigo 1", 45, "Abstract 1", 2018, 2355, 34553, 13897, journal1, null, null);
-        Article article2 = new Article("Artigo 2", 20, "Abstract 2", 2024, 5544, 67432, 19087, journal2, null, null);
-        Article article3 = new Article("Artigo 3", 33, "Abstract 3", 2009, 10008, 102234, 35648, conference1, null, null);
-        Article article4 = new Article("Artigo 4", 17, "Abstract 4", 2020, 456, 7895, 1263, conference2, null, null);
-        Article article5 = new Article("Artigo 5", 23, "Abstract 5", 2014, 7815, 40325, 12622, journal1, null, null);
-        Article article6 = new Article("Artigo 6", 11, "Abstract 6", 2003, 784, 11462, 3417, conference2, null, null);
+        Article article1 = new Article("Artigo 1", 45, "Abstract 1", 2018, 2355, 34553, 13897, journal1, null, authorsArticle1);
+        Article article2 = new Article("Artigo 2", 20, "Abstract 2", 2024, 5544, 67432, 19087, journal2, null, authorsArticle2);
+        Article article3 = new Article("Artigo 3", 33, "Abstract 3", 2009, 10008, 102234, 35648, conference1, null, authorsArticle3);
+        Article article4 = new Article("Artigo 4", 17, "Abstract 4", 2020, 456, 7895, 1263, conference2, null, authorsArticle4);
+        Article article5 = new Article("Artigo 5", 23, "Abstract 5", 2014, 7815, 40325, 12622, journal1, null, authorsArticle5);
+        Article article6 = new Article("Artigo 6", 11, "Abstract 6", 2003, 784, 11462, 3417, conference2, null, authorsArticle6);
+        Article article7 = new Article("Artigo 7", 51, "Abstract 7", 2024, 0, 0, 0, conference2, null, authorsArticle7);
 
         addArticle(article1);
         addArticle(article2);
@@ -69,7 +77,29 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         addArticle(article4);
         addArticle(article5);
         addArticle(article6);
+        addArticle(article7);
 
+        authorsArticle1.add(authors.get(1));
+        authorsArticle1.add(authors.get(0))
+        ;
+        authorsArticle2.add(authors.get(2));
+        authorsArticle2.add(authors.get(0));
+
+        authorsArticle3.add(authors.get(3));
+        authorsArticle3.add(authors.get(1));
+
+        authorsArticle4.add(authors.get(4));
+        authorsArticle4.add(authors.get(2));
+        authorsArticle4.add(authors.get(3));
+
+        authorsArticle5.add(authors.get(1));
+
+        authorsArticle6.add(authors.get(4));
+        authorsArticle6.add(authors.get(3));
+
+        authorsArticle7.add(authors.get(4));
+        authorsArticle7.add(authors.get(3));
+        authorsArticle7.add(authors.get(2));
     }
 
     public void put(int key, Article article) {
@@ -84,6 +114,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
     public Author getAuthor(int cienciaID) {
         return authors.get(cienciaID);
     }
+
     public void archiveAuthor(String data) {
 
         try (FileWriter writer = new FileWriter("authorArchive.txt", true)) {
@@ -93,6 +124,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
             System.err.println("Error writing author name to file ");
         }
     }
+
     public Author removeAuthor(Author author) {
         archiveAuthor(author.toString());
         authors.delete(author.getCienciaID());
@@ -111,6 +143,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         articles.put(article.getTitulo(), article);
         return article;
     }
+
     public Article getArticle(String titulo) {
         return articles.get(titulo);
     }
@@ -124,6 +157,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
             System.err.println("Error writing article name to file ");
         }
     }
+
     public Article removeArticle(Article article) {
         archiveArticle(article.toString());
         articles.delete(article.getTitulo());
@@ -136,6 +170,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         System.out.println("Number of Views: " + article.getNumViews());
         System.out.println("Number of Likes: " + article.getNumLikes());
     }
+
     public Article listArticles() {
         for (String key : articles.keys()) {
             System.out.println(articles.get(key));
@@ -158,6 +193,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
             System.err.println("Error writing publication name to file ");
         }
     }
+
     public Publication removePublication(Publication publication) {
         archivePublication(publication.toString());
         publications.remove(publication);
@@ -175,15 +211,70 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         int key = article.getAno();
         put(key, article);
     }
-    static void testAuthor (DB db){
+
+
+    public ArrayList<Article> getArticlesByAuthorAndYears(Author author, int startYear, int endYear) {
+        ArrayList<Article> authorArticles = new ArrayList<>();
+
+        for (String title : this.articles.keys()) {
+            Article article = this.articles.get(title);
+            if (article.getAutores().contains(author) && article.getAno() >= startYear && article.getAno() <= endYear) {
+                authorArticles.add(article);
+            }
+        }
+        System.out.println("Articles by author " + author.getNomeCientifico() + " between " + startYear + " and " + endYear + ": " + authorArticles.size());
+        return authorArticles;
+    }
+
+    public ArrayList<Article> getDownloadStatusByArticleAndYears(int startYear, int endYear) {
+        ArrayList<Article> downloadedArticles = new ArrayList<>();
+
+        for (String title : this.articles.keys()) {
+            Article article = this.articles.get(title);
+            if (article.getAno() >= startYear && article.getAno() <= endYear) {
+                if (article.getNumDownloads() == 0) {
+                    downloadedArticles.add(article);
+                }
+            }
+        }
+        System.out.println("Download status of articles between " + startYear + " and " + endYear + ": " + downloadedArticles.size());
+        return downloadedArticles;
+    }
+
+    public ArrayList<Article> getTop3ArticlesByLikes(int startYear, int endYear) {
+        ArrayList<Article> articlesWithinPeriod = new ArrayList<>();
+
+        for (Integer year : this.articlesByYear.keys(startYear, endYear)) {
+            articlesWithinPeriod.add(this.articlesByYear.get(year));
+        }
+
+        Collections.sort(articlesWithinPeriod, new Comparator<Article>(){
+            @Override
+            public int compare(Article a1, Article a2) {
+                return Integer.compare(a2.getNumLikes(), a1.getNumLikes());
+            }
+        });
+
+        System.out.println("Number of articles within the period: " + articlesWithinPeriod.size());
+
+        int topCount = Math.min(3, articlesWithinPeriod.size());
+        ArrayList<Article> top3Articles = new ArrayList<>(articlesWithinPeriod.subList(0, topCount));
+
+        System.out.println("Number of top 3 articles: " + top3Articles.size());
+        for (Article article : top3Articles) {
+            System.out.println("Title: " + article.getTitulo() + ", Likes: " + article.getNumLikes());
+        }
+        return top3Articles;
+    }
+
+    static void testAuthor(DB db) {
         db.listAuthors();
         println("");
         db.removeAuthor(db.getAuthor(1));
         db.listAuthors();
-
     }
 
-    static void testPublication (DB db){
+    static void testPublication(DB db) {
 
         db.listPublications();
         db.removePublication(db.publications.get(0));
@@ -191,17 +282,16 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         db.listPublications();
     }
 
-    static void testArticle (DB db){
+    static void testArticle(DB db) {
         db.listArticles();
         db.removeArticle(db.articles.get("Artigo 1"));
         println("");
         db.listArticles();
 
         db.listArticleStats(db.articles.get("Artigo 2"));
-
     }
 
-    static void testSearchArticlePerPeriod(DB db){
+    static void testSearchArticlePerPeriod(DB db) {
 
         db.insertArticleByYear(db.articles.get("Artigo 1"));
         db.insertArticleByYear(db.articles.get("Artigo 2"));
@@ -209,14 +299,20 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         db.insertArticleByYear(db.articles.get("Artigo 4"));
         db.insertArticleByYear(db.articles.get("Artigo 5"));
         db.insertArticleByYear(db.articles.get("Artigo 6"));
+        db.insertArticleByYear(db.articles.get("Artigo 7"));
 
-        for (Integer key : db.articlesByYear.keys()) {
-            System.out.println(key + " " + db.articlesByYear.get(key));
-        }
+
+
+
+
+        //db.getArticlesByAuthorAndYears(db.authors.get(2), 2000, 2025).forEach(System.out::println);
+        //db.getDownloadStatusByArticleAndYears(2000, 2024).forEach(System.out::println);
+
+        db.getTop3ArticlesByLikes(2000, 2024);
+
 
 
     }
-
 
 
     public static void main(String[] args) {
