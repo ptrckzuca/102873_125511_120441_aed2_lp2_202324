@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Article{
 
+    private int ArticleID;
     private String titulo;
     private int keyWords;
     private String Abstract;
@@ -13,13 +14,14 @@ public class Article{
     private int numViews;
     private int numLikes;
     private Publication pub;
-    private ArrayList<Article> referencias;
+    //private ArrayList<Article> referencias;
     private ArrayList<Author> autores;
 
     public Article() {
 
     }
-    public Article(String titulo, Integer keyWords, String anAbstract, int ano, int numDownloads, int numViews, int numLikes, Publication pub, ArrayList<Article> referencias, ArrayList<Author> autores) {
+    public Article(int articleID, String titulo, Integer keyWords, String anAbstract, int ano, int numDownloads, int numViews, int numLikes, Publication pub, ArrayList<Author> autores) {
+        this.ArticleID = articleID;
         this.titulo = titulo;
         this.keyWords = keyWords;
         this.Abstract = anAbstract;
@@ -28,10 +30,17 @@ public class Article{
         this.numViews = numViews;
         this.numLikes = numLikes;
         this.pub = pub;
-        this.referencias = referencias;
+        //this.referencias = referencias;
         this.autores = autores;
     }
 
+    public int getArticleId() {
+        return ArticleID;
+    }
+
+    public void setArticleID(int articleID) {
+        this.ArticleID = ArticleID;
+    }
     public String getTitulo() {
         return titulo;
     }
@@ -96,14 +105,6 @@ public class Article{
         this.pub = pub;
     }
 
-    public ArrayList<Article> getReferencias() {
-        return referencias;
-    }
-
-    public void setReferencias(ArrayList<Article> referencias) {
-        this.referencias = referencias;
-    }
-
     public ArrayList<Author> getAutores() {
         return autores;
     }
@@ -111,6 +112,18 @@ public class Article{
     public void setAutores(ArrayList<Author> autores) {
         this.autores = autores;
     }
+
+    public void addAutor(Author a){
+        this.autores.add(a);
+    }
+
+    public void removeAutor(Author a){
+        this.autores.remove(a);
+    }
+    public void searchAutor(Author a){
+        this.autores.contains(a);
+    }
+
 
     @Override
     public String toString() {
@@ -123,7 +136,7 @@ public class Article{
                 ", numViews=" + numViews +
                 ", numLikes=" + numLikes +
                 ", pub=" + pub +
-                ", referencias=" + referencias +
+                //", referencias=" + referencias +
                 ", autores=" + autores +
                 '}';
     }

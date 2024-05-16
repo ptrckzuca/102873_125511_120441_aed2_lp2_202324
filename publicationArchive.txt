@@ -1,0 +1,14 @@
+
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}
+PubConference{dataInicio=Date{day=18, month=6, year=2023}, dataFim=Date{day=22, month=6, year=2023}, local='Vancouver'}

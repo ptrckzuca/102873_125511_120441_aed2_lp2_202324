@@ -4,5 +4,5 @@ public interface DBManagePublicationsI {
     public Publication addPublication(Publication publication);
     public Publication removePublication(Publication publication);
     public void archivePublication(String data);
-    public Publication listPublications();
+    public void listPublications();
 }

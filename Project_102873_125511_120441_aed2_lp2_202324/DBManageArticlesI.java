@@ -6,5 +6,6 @@ public interface DBManageArticlesI {
     public Article removeArticle(Article article);
     public void archiveArticle(String data);
     public void listArticleStats(Article article);
-    public Article listArticles();
+    public void listArticles();
+
 }

@@ -58,12 +58,9 @@ public class PubJournal extends Publication {
     this.series = series;
   }
 
-  public void publicarJournal(Article article, int ano, String publisher) {
-  }
-
   @Override
   public String toString() {
-    return "PubJournal{" +
+    return super.toString() + " + PubJournal{" +
             "jcrIF=" + jcrIF +
             ", scopusIF=" + scopusIF +
             ", periodicidade='" + periodicidade + '\'' +

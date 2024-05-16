@@ -3,6 +3,7 @@ package Project_102873_125511_120441_aed2_lp2_202324;
 import edu.ufp.inf.lp2.p01_intro.Date;
 import edu.ufp.inf.lp2.p01_intro.Person;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Author extends Person  {
@@ -15,6 +16,8 @@ public class Author extends Person  {
   private String email;
 
   public Author() {
+
+
   }
 
   public Author(String idNumber, String name, String address, Date birth, String email, String orcid, String filiacao, int cienciaID, int googleScholarID, String nomeCientifico) {

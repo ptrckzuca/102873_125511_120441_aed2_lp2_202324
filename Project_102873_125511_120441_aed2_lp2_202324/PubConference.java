@@ -42,12 +42,9 @@ public class PubConference extends Publication {
     this.local = local;
   }
 
-  public void publicarConferencia(Article article, int ano, int numeroEdicao, String local) {
-  }
-
   @Override
   public String toString() {
-    return "PubConference{" +
+    return super.toString() + " +PubConference{" +
             "dataInicio=" + dataInicio +
             ", dataFim=" + dataFim +
             ", local='" + local + '\'' +
