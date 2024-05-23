@@ -30,6 +30,9 @@ public class Author extends Person  {
     this.nomeCientifico = nomeCientifico;
   }
 
+  public Author(int id, String idNumber, String name, String address, java.util.Date birth, String orcid, int cienciaID, String filiacao, int googleScholarID, String nomeCientifico, String email) {
+  }
+
   public String getEmail() {
     return email;
   }

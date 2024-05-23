@@ -1,0 +1,19 @@
+Node:1,Article{titulo='Artigo 100', keyWords=0, Abstract='null', ano=0, numDownloads=0, numViews=0, numLikes=0, pub=null, autores=null}
+Node:2,Article{titulo='Artigo 2', keyWords=0, Abstract='null', ano=0, numDownloads=0, numViews=0, numLikes=0, pub=null, autores=null}
+Node:3,Article{titulo='Artigo 3', keyWords=0, Abstract='null', ano=0, numDownloads=0, numViews=0, numLikes=0, pub=null, autores=null}
+Node:4,Article{titulo='Artigo 4', keyWords=0, Abstract='null', ano=0, numDownloads=0, numViews=0, numLikes=0, pub=null, autores=null}
+Node:5,Article{titulo='Artigo 5', keyWords=0, Abstract='null', ano=0, numDownloads=0, numViews=0, numLikes=0, pub=null, autores=null}
+Node:6,Article{titulo='Artigo 6', keyWords=0, Abstract='null', ano=0, numDownloads=0, numViews=0, numLikes=0, pub=null, autores=null}
+Node:7,Article{titulo='Artigo 7', keyWords=0, Abstract='null', ano=0, numDownloads=0, numViews=0, numLikes=0, pub=null, autores=null}
+Article 7 references Article 1 Nº of references: 2
+Article 7 references Article 2 Nº of references: 4
+Article 7 references Article 6 Nº of references: 3
+Article 5 references Article 3 Nº of references: 4
+Article 5 references Article 6 Nº of references: 6
+Article 4 references Article 5 Nº of references: 6
+Article 4 references Article 6 Nº of references: 5
+Article 3 references Article 6 Nº of references: 9
+Article 2 references Article 1 Nº of references: 4
+Article 2 references Article 4 Nº of references: 4
+Article 2 references Article 5 Nº of references: 6
+Article 1 references Article 4 Nº of references: 10

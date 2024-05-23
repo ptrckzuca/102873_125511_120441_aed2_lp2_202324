@@ -14,7 +14,6 @@ public class Article{
     private int numViews;
     private int numLikes;
     private Publication pub;
-    //private ArrayList<Article> referencias;
     private ArrayList<Author> autores;
 
     public Article() {
@@ -32,6 +31,11 @@ public class Article{
         this.pub = pub;
         //this.referencias = referencias;
         this.autores = autores;
+    }
+
+    public Article(int id, String title) {
+        this.ArticleID = id;
+        this.titulo = title;
     }
 
     public int getArticleId() {

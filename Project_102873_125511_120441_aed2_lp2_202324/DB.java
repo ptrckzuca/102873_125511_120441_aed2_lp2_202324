@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Map;
 
 import static edu.princeton.cs.algs4.StdOut.println;
 
@@ -153,6 +152,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         publications.remove(publication);
         return publication;
     }
+
 
     public void listPublications() {
         for (Publication publication : publications) {
@@ -297,7 +297,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         Article article4 = new Article(3, "Artigo 4", 17, "Abstract 4", 2020, 456, 7895, 1263, conference2, authorsArticle4);
         Article article5 = new Article(4, "Artigo 5", 23, "Abstract 5", 2014, 7815, 40325, 12622, journal1, authorsArticle5);
         Article article6 = new Article(5, "Artigo 6", 11, "Abstract 6", 2003, 784, 11462, 3417, conference2, authorsArticle6);
-        Article article7 = new Article(6, "Artigo 7", 51, "Abstract 7", 2024, 0, 0, 0, conference2, authorsArticle7);
+        Article article7 = new Article(6, "Artigo 7", 51, "Abstract 7", 2024, 0, 0, 0, conference1, authorsArticle7);
 
         db.addArticle(article1);
         db.addArticle(article2);
@@ -336,9 +336,9 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
     static void testArticle(DB db) {
         db.listArticles();
 
-        //db.removeArticle(db.articles.get("Artigo 1"));
+        db.removeArticle(db.articles.get("Artigo 1"));
         println("");
-        //db.listArticles();
+        db.listArticles();
 
         db.listArticleStats(db.articles.get("Artigo 2"));
     }
@@ -365,7 +365,9 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
     }
 
     static void testArticleWeightedDigraph(DB db){
-        ArticleWeightedDigraph awd = new ArticleWeightedDigraph();
+
+        ArticleWeightedDigraph awd = new ArticleWeightedDigraph(8);
+          /*
         awd.addArticleToGraph(db.articles.get("Artigo 1"));
         awd.addArticleToGraph(db.articles.get("Artigo 2"));
         awd.addArticleToGraph(db.articles.get("Artigo 3"));
@@ -392,17 +394,30 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         awd.addEdge(db.articles.get("Artigo 4"), db.articles.get("Artigo 5"), 7);
         awd.addEdge(db.articles.get("Artigo 4"), db.articles.get("Artigo 6"), 2);
 
-        awd.printVerticeConnections(db.articles.get("Artigo 6"));
+         */
 
 
+        //awd.listTypeOfPubInAPeriod("IEEE Transactions on Pattern Analysis and Machine Intelligence", 2024, 2025);
 
-        //awd.searchArticle(db.articles.get("Artigo 7"));
 
-        //awd.printVerticeConnections(db.articles.get("Artigo 7"));
+        //awd.shortestPathBetweenArticles(db.articles.get("Artigo 6"), db.articles.get("Artigo 7"));
+
+        //awd.searchArticle(db.articles.get("Artigo 2"));
+
+        //awd.printVerticeConnections(db.articles.get("Artigo 4"));
+
+        //awd.searchSelfCitations(db.articles.get("Artigo 6"));
+
+        //awd.listarCitacoesPorJournalEPorPeriodo("IEEE Transactions on Pattern Analysis and Machine Intelligence", 2000, 2025);
+
+        awd.addInputToArticleGraph("articleInputGraph.txt");
+        awd.saveArticleGraphToFile("articleGraph.txt");
+
     }
 
     static void testAuthorWeightedGraph(DB db){
-        AuthorWeightedGraph awg = new AuthorWeightedGraph();
+        AuthorWeightedGraph awg = new AuthorWeightedGraph(6);
+        /*
         awg.addAuthorToGraph(db.authors.get(1));
         awg.addAuthorToGraph(db.authors.get(2));
         awg.addAuthorToGraph(db.authors.get(3));
@@ -417,12 +432,20 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         awg.addEdge(db.authors.get(2), db.authors.get(4), 3);
         awg.addEdge(db.authors.get(2), db.authors.get(5), 2);
         awg.addEdge(db.authors.get(3), db.authors.get(4), 3);
-        awg.addEdge(db.authors.get(3), db.authors.get(5), 0);
+        //awg.addEdge(db.authors.get(3), db.authors.get(5), 0);
         awg.addEdge(db.authors.get(4), db.authors.get(5), 1);
+*/
 
-        awg.printVerticeConnections(db.authors.get(1));
 
-        awg.searchAuthor(db.authors.get(1));
+        //awg.countCollaborators(db.authors.get(5));
+
+        //awg.printVerticeConnections(db.authors.get(3));
+        //awg.searchAuthor(db.authors.get(1));
+
+        awg.addInputToAuthorGraph("authorInputGraph.txt");
+        awg.saveAuthorGraphToFile("authorGraph.txt");
+
+
 
     }
 
@@ -442,6 +465,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
 
         //testArticleWeightedDigraph(db);
         testAuthorWeightedGraph(db);
+
 
         //testAuthor(db);
         //testArticle(db);

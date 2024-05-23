@@ -1,0 +1,15 @@
+Node:1, Author{Person{idNumber='null', name='null', address='null', birth=null}orcid='null', filiacao='null', CienciaID=0, GoogleScholarID=0, nomeCientifico='null', email='null'}
+Node:2, Author{Person{idNumber='null', name='null', address='null', birth=null}orcid='null', filiacao='null', CienciaID=0, GoogleScholarID=0, nomeCientifico='null', email='null'}
+Node:3, Author{Person{idNumber='null', name='null', address='null', birth=null}orcid='null', filiacao='null', CienciaID=0, GoogleScholarID=0, nomeCientifico='null', email='null'}
+Node:4, Author{Person{idNumber='null', name='null', address='null', birth=null}orcid='null', filiacao='null', CienciaID=0, GoogleScholarID=0, nomeCientifico='null', email='null'}
+Node:5, Author{Person{idNumber='null', name='null', address='null', birth=null}orcid='null', filiacao='null', CienciaID=0, GoogleScholarID=0, nomeCientifico='null', email='null'}
+Author 4 worked with Author 5, 1 times
+Author 3 worked with Author 4, 3 times
+Author 3 worked with Author 5, 0 times
+Author 2 worked with Author 3, 2 times
+Author 2 worked with Author 4, 3 times
+Author 2 worked with Author 5, 2 times
+Author 1 worked with Author 2, 2 times
+Author 1 worked with Author 3, 2 times
+Author 1 worked with Author 4, 1 times
+Author 1 worked with Author 5, 1 times

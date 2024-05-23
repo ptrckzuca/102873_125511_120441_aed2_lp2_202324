@@ -1,0 +1,16 @@
+5,10
+1,11,Antonio Ferreira,Rua Luis Camoes,1980-01-01,10,1234,FiliacaoOne,5678,Toni,Toni@example.com
+2,22,Amilcar Silva,Rua Florbela Espanca,1985-05-05,20,5678,FiliacaoTwo,6789,Silvinha,Silva2@example.com
+3,33,Alberto Campos,Rua Cesário Verde,1990-12-12,30,9101,FiliacaoThree,7890,Bertinho,Berto@example.com
+4,44,Jorge Castro,Rua Dão Dinis,1990-12-12,40,9101,FiliacaoThree,7890,Jorjão,Jorginho@example.com
+5,55,Fausto Matias,Rua Inês De Castro,1990-12-12,50,9101,FiliacaoThree,7890,Faustinho,Fausto@example.com
+1,2,2
+1,3,2
+1,4,1
+1,5,1
+2,3,2
+2,4,3
+2,5,2
+3,4,3
+3,5,0
+4,5,1

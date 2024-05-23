@@ -1,0 +1,20 @@
+7 12
+1 Artigo 1
+2 Artigo 2
+3 Artigo 3
+4 Artigo 4
+5 Artigo 5
+6 Artigo 6
+7 Artigo 7
+1 4 10
+2 1 4
+2 4 4
+2 5 6
+3 6 9
+4 5 6
+4 6 5
+5 3 4
+5 6 6
+7 1 2
+7 2 4
+7 6 3
