@@ -14,15 +14,15 @@ Objetivos a serem cumpridos.
 - [x] R4; 
 - [x] R5;  
 - [x] R6;
-- [ ] R7;
+- [x] R7;
 
 ## MILESTONE 2:
 
 - [x] R8;
-- [ ] R9;
-- [ ] R10;
+- [x] R9;
+- [x] R10;
 - [ ] R11;
-- [ ] R12; 
+- [x] R12; 
 - [ ] R13;
 
 
