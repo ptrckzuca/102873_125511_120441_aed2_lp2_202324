@@ -21,9 +21,9 @@ Objetivos a serem cumpridos.
 - [x] R8;
 - [x] R9;
 - [x] R10;
-- [ ] R11;
+- [x] R11;
 - [x] R12; 
-- [ ] R13;
+- [x] R13;
 
 
 
