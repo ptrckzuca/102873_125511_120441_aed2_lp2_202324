@@ -4,12 +4,12 @@ import edu.princeton.cs.algs4.*;
 
 
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import edu.ufp.inf.lp2.p01_intro.Date;
+import edu.ufp.inf.lp2.p07inputoutput.FileBinOutputStreamApp;
 
 
 public class AuthorWeightedGraph {
@@ -58,49 +58,113 @@ public class AuthorWeightedGraph {
 
         System.out.println();
     }
+
+    /**
+     * Retrieves authors belonging to a specific affiliation.
+     *
+     * @param filiacao The affiliation to search for authors.
+     */
+    public void getAuthorsByAffiliation(String filiacao) {
+        boolean found = false;
+
+        System.out.println("Authors in filiation " + filiacao + ":");
+
+        for (Integer id : AuthorsInGraph.keys()) {
+            Author author = AuthorsInGraph.get(id);
+            if (author.getFiliacao().equalsIgnoreCase(filiacao)) {
+                System.out.println("- " + author.getName());
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Impossible to find any author: " + filiacao);
+        }
+    }
+
+
+    /**
+     * Counts the number of collaborators for a given author in the graph.
+     *
+     * @param author The author for whom collaborators are counted.
+     * @return The number of collaborators for the given author.
+     */
     public int countCollaborators(Author author) {
         int collaboratorCount = 0;
 
-        // Verificar se o autor está presente no grafo
+        // verificar se o autor está presente no grafo
         if (!AuthorsInGraph.contains(author.getCienciaID())) {
             System.out.println("O autor não está presente no grafo.");
             return collaboratorCount;
         }
 
-        // Obter o índice do autor no grafo
+        // obter o índice do autor no grafo
         int authorIndex = author.getCienciaID();
 
-        // Imprimir o nome do autor
+        // imprimir o nome do autor
         System.out.println("Colaboradores do autor: " + author.getName());
 
-        // Percorrer todas as arestas conectadas ao autor
+        // percorrer todas as arestas conectadas ao autor
         for (Edge edge : G.adj(authorIndex)) {
-            // Obter o índice do autor colaborador
+            // obter o índice do autor colaborador
             int collaboratorIndex = edge.other(authorIndex);
 
-            // Obter o autor colaborador a partir do índice
+            // obter o autor colaborador a partir do índice
             Author collaborator = AuthorsInGraph.get(collaboratorIndex);
 
-            // Incrementar o contador de colaboradores
+            // incrementar o contador de colaboradores
             collaboratorCount++;
 
-            // Imprimir o nome do colaborador
+            // imprimir o nome do colaborador
             System.out.println("Nome do colaborador: " + collaborator.getName());
         }
 
         return collaboratorCount;
     }
+
+    /**
+     * Finds the shortest path between two authors in the graph.
+     *
+     * @param a1 The first author.
+     * @param a2 The second author.
+     */
+    public void shortestPathBetweenAuthors(Author a1, Author a2) {
+        int s = a1.getCienciaID();
+        int t = a2.getCienciaID();
+        Graph unweightedGraph = convertToUnweightedGraph(G);
+        BreadthFirstPaths bfs = new BreadthFirstPaths(unweightedGraph, s);
+        if (bfs.hasPathTo(t)) {
+            System.out.println("Shortest path between " + a1.getName() + " and " + a2.getName() + ":");
+            for (int v : bfs.pathTo(t)) {
+                System.out.print(AuthorsInGraph.get(v).getName() + " -> ");
+            }
+            System.out.println(a2.getName());
+        } else {
+            System.out.println("No path found");
+        }
+    }
+    /**
+     * Checks if the graph is connected.
+     *
+     * @return True if the graph is connected, false otherwise.
+     */
     public boolean isConnected() {
         Graph unweightedGraph = convertToUnweightedGraph(G);
         DepthFirstPaths dfs = new DepthFirstPaths(unweightedGraph, 0);
         for (int v = 0; v < unweightedGraph.V(); v++) {
             if (!dfs.hasPathTo(v)) {
-                return false; // If any vertex is unreachable, the graph is not connected
+                return false; // se nao aceder a vertice, nao esta conectado
             }
         }
         return true;
     }
 
+    /**
+     * Converts an EdgeWeightedGraph to an unweighted Graph.
+     *
+     * @param G The EdgeWeightedGraph to be converted.
+     * @return An unweighted Graph containing the same vertices and connections as the original EdgeWeightedGraph.
+     */
     private Graph convertToUnweightedGraph(EdgeWeightedGraph G) {
         Graph unweightedGraph = new Graph(G.V());
         for (Edge e : G.edges()) {
@@ -130,12 +194,12 @@ public class AuthorWeightedGraph {
      */
     public void saveAuthorGraphToFile(String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            // Save authors
+            // guarda autores
             for (int id : AuthorsInGraph.keys()) {
                 Author author = AuthorsInGraph.get(id);
                 writer.write(String.format("Node:%d, %s\n", id, author.toString()));
             }
-            // Save edges
+            // guaeda arestas
             for (Edge e : G.edges()) {
                 writer.write(String.format("Author %d worked with Author %d, %d times\n", e.either(), e.other(e.either()), (int)e.weight()));
             }
@@ -242,18 +306,60 @@ public class AuthorWeightedGraph {
         System.out.println("AuthorsInGraph size: " + AuthorsInGraph.size());
     }
 
-    public void fileTextOutputStream(String filepath) {
-        Logger.getLogger(AuthorWeightedGraph.class.getName()).log(Level.INFO, "fileTextOutputStream(): write to text file " + filepath);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
+    /**
+     * Writes the author data from the graph to a binary file.
+     *
+     * @param filepath The filepath where the binary file will be written.
+     */
+    public void readBinFromAuthorGraph(String filepath) {
+        Logger.getLogger(AuthorWeightedGraph.class.getName()).log(Level.INFO, "readBinFromAuthorGraph(): write to text file " + filepath);
+        try (DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(filepath)))) {
             for (Integer id : AuthorsInGraph.keys()) {
                 Author author = AuthorsInGraph.get(id);
-                writer.write(author.toString());
-                writer.newLine();
+                dos.writeBytes(author.toString());
             }
         } catch (IOException e) {
             Logger.getLogger(AuthorWeightedGraph.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    /**
+     * Reads author data from a binary file and inputs it into the author graph.
+     *
+     * @param filepath The filepath of the binary file to be read.
+     */
+    public static void inputBinToAuthorGraph(String filepath) {
+        Logger.getLogger(AuthorWeightedGraph.class.getName()).log(Level.INFO, "inputBinToAuthorGraph(): read from bin file " + filepath);
+        try (DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(filepath)))) {
+
+            int size = dis.readInt();
+            System.out.println("FileBinOutputStreamApp - inputBinToAuthorGraph(): size = " + size);
+            for (int i = 0; i < size; i++) {
+                double d = dis.readDouble();
+                System.out.println("FileBinOutputStreamApp - inputBinToAuthorGraph(): data[" + i + "] = " + d);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(Thread.currentThread().getName()).log(Level.INFO, e.toString());
+        }
+    }
+
+    /*public static void inputBinToAuthorGraph(String filepath) {
+        Logger.getLogger(AuthorWeightedGraph.class.getName()).log(Level.INFO, "inputBinToAuthorGraph(): read from bin file " + filepath);
+        try (DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(filepath)))) {
+            // Assuming the file starts with an integer size indicating the length of the text
+            int size = dis.readInt();
+            System.out.println("FileBinOutputStreamApp - inputBinToAuthorGraph(): size = " + size);
+
+            // Read the following bytes as UTF-8 encoded text
+            byte[] bytes = new byte[size];
+            dis.readFully(bytes);
+            String text = new String(bytes, StandardCharsets.UTF_8);
+            System.out.println("FileBinOutputStreamApp - inputBinToAuthorGraph(): text = " + text);
+        } catch (IOException e) {
+            Logger.getLogger(AuthorWeightedGraph.class.getName()).log(Level.SEVERE, e.toString());
+        }
+    }*/
+
 }
 
 

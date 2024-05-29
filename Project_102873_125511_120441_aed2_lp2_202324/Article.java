@@ -17,7 +17,6 @@ public class Article{
     private ArrayList<Author> autores;
 
     public Article() {
-
     }
     public Article(int articleID, String titulo, Integer keyWords, String anAbstract, int ano, int numDownloads, int numViews, int numLikes, Publication pub, ArrayList<Author> autores) {
         this.ArticleID = articleID;

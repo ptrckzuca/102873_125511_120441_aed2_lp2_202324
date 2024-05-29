@@ -20,7 +20,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
     private ST<String, Article> articles;
     private ArrayList<Publication> publications;
     private RedBlackBST<Integer, Article> articlesByYear;
-    private ArticleWeightedDigraph awd;
+
 
     public DB() {
         articlesByYear = new RedBlackBST<>();
@@ -28,10 +28,11 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         articles = new ST<>();
         publications = new ArrayList<>();
     }
-
+/*
     public void put(int key, Article article) {
         articlesByYear.put(key, article);
     }
+    */
 
     public Author addAuthor(Author author) {
         authors.put(author.getCienciaID(), author);
@@ -184,8 +185,17 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
     public void insertArticleByYear(Article article) {
         int key = article.getAno();
         this.articlesByYear.put(key, article);
-        //put(key, article);
+
     }
+
+    /**
+     * Retrieves articles authored by a specific author within a given time frame.
+     *
+     * @param author The author whose articles are to be retrieved.
+     * @param startYear The start year of the time frame.
+     * @param endYear The end year of the time frame.
+     * @return An ArrayList of articles authored by the specified author within the given time frame.
+     */
     public ArrayList<Article> getArticlesByAuthorAndYears(Author author, int startYear, int endYear) {
         ArrayList<Article> authorArticles = new ArrayList<>();
 
@@ -200,6 +210,13 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         return authorArticles;
     }
 
+    /**
+     * Retrieves articles that have been downloaded within a specified time frame.
+     *
+     * @param startYear The start year of the time frame.
+     * @param endYear The end year of the time frame.
+     * @return An ArrayList of articles that have been downloaded within the specified time frame.
+     */
     public ArrayList<Article> getDownloadStatusByArticleAndYears(int startYear, int endYear) {
         ArrayList<Article> downloadedArticles = new ArrayList<>();
 
@@ -214,6 +231,13 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         return downloadedArticles;
     }
 
+    /**
+     * Retrieves the top 3 articles with the highest number of likes within a specified time frame.
+     *
+     * @param startYear The start year of the time frame.
+     * @param endYear The end year of the time frame.
+     * @return An ArrayList containing the top 3 articles with the highest number of likes within the specified time frame.
+     */
     public ArrayList<Article> getTop3ArticlesByLikes(int startYear, int endYear) {
         ArrayList<Article> articlesWithinPeriod = new ArrayList<>();
 
@@ -350,7 +374,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
     static void testArticleWeightedDigraph(DB db) {
 
         ArticleWeightedDigraph awd = new ArticleWeightedDigraph(8);
-/*
+
         awd.addArticleToGraph(db.articles.get("Artigo 1"));
         awd.addArticleToGraph(db.articles.get("Artigo 2"));
         awd.addArticleToGraph(db.articles.get("Artigo 3"));
@@ -376,18 +400,21 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
 
         awd.addEdge(db.articles.get("Artigo 4"), db.articles.get("Artigo 5"), 7);
         awd.addEdge(db.articles.get("Artigo 4"), db.articles.get("Artigo 6"), 2);
-    */
-        //awd.listTypeOfPubInAPeriod("IEEE Transactions on Pattern Analysis and Machine Intelligence", 2024, 2025);
-        //awd.shortestPathBetweenArticles(db.articles.get("Artigo 6"), db.articles.get("Artigo 7"));
+
+        //awd.listTypeOfPubInAPeriod("IEEE Transactions on Pattern Analysis and Machine Intelligence", 2000, 2025);
+        //awd.shortestPathBetweenArticles(db.articles.get("Artigo 7"), db.articles.get("Artigo 5"));
         //awd.searchArticle(db.articles.get("Artigo 2"));
         //awd.printVerticeConnections(db.articles.get("Artigo 4"));
         //awd.searchSelfCitations(db.articles.get("Artigo 6"));
         //awd.listarCitacoesPorJournalEPorPeriodo("IEEE Transactions on Pattern Analysis and Machine Intelligence", 2000, 2025);
 
-        awd.addInputToArticleGraph("articleInputGraph.txt");
-        awd.saveArticleGraphToFile("articleGraph.txt");
+        //awd.addInputToArticleGraph("articleInputGraph.txt");
+        //awd.saveArticleGraphToFile("articleGraph.txt");
 
-        System.out.println("Is the graph strongly connected? " + awd.isStronglyConnected());
+        //System.out.println("Is the graph strongly connected? " + awd.isStronglyConnected());
+
+        //awd.readBinFromArticleGraph("articleGraphBin.bin");
+        //awd.inputBinToArticleGraph("articleGraphBin.bin");
 
     }
 
@@ -408,9 +435,11 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         awg.addEdge(db.authors.get(2), db.authors.get(4), 3);
         awg.addEdge(db.authors.get(2), db.authors.get(5), 2);
         awg.addEdge(db.authors.get(3), db.authors.get(4), 3);
-        awg.addEdge(db.authors.get(3), db.authors.get(5), 0);
         awg.addEdge(db.authors.get(4), db.authors.get(5), 1);
 
+
+
+        //awg.getAuthorsByAffiliation("EXECX");
         //awg.countCollaborators(db.authors.get(5));
 
         //awg.printVerticeConnections(db.authors.get(3));
@@ -418,7 +447,9 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
 
         //awg.addInputToAuthorGraph("authorInputGraph.txt");
         //awg.saveAuthorGraphToFile("authorGraph.txt");
-        awg.fileTextOutputStream("authorGraphBin.bin");
+        //awg.shortestPathBetweenAuthors(db.authors.get(3), db.authors.get(5));
+        //awg.readBinFromAuthorGraph("authorGraphBin.bin");
+        //awg.inputBinToAuthorGraph("authorGraphBin.bin");
         //System.out.println("Is the graph connected? " + awg.isConnected());
     }
 
@@ -435,7 +466,7 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         db.listArticles();*/
 
        //testArticleWeightedDigraph(db);
-        // testAuthorWeightedGraph(db);
+       testAuthorWeightedGraph(db);
 
         //testAuthor(db);
         //testArticle(db);

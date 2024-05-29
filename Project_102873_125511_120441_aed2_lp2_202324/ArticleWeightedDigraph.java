@@ -5,7 +5,8 @@ import edu.princeton.cs.algs4.*;
 
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ArticleWeightedDigraph {
     EdgeWeightedDigraph G;
@@ -22,6 +23,11 @@ public class ArticleWeightedDigraph {
         articlesInGraph.put(id, a);
     }
 
+    /**
+     * Searches for an article in the graph and prints its details if found.
+     *
+     * @param a The article to search for.
+     */
     public void searchArticle(Article a) {
         if (articlesInGraph.contains(a.getArticleId())) {
             System.out.println("Article found!");
@@ -47,10 +53,16 @@ public class ArticleWeightedDigraph {
     public void addEdge(Article a1, Article a2, double weight) {
         G.addEdge(new DirectedEdge(a1.getArticleId(), a2.getArticleId(), weight));
 
-    }public void add_Edge(int v, int w, double weight) {
+    }
+    public void add_Edge(int v, int w, double weight) {
         G.addEdge(new DirectedEdge(v, w, weight));
     }
 
+    /**
+     * Prints the connections (references) of an article in the graph.
+     *
+     * @param a The article whose connections are to be printed.
+     */
     public void printVerticeConnections(Article a) {
         System.out.println("Article Title: " + a.getTitulo());
 
@@ -63,18 +75,25 @@ public class ArticleWeightedDigraph {
         System.out.println();
     }
 
+    /**
+     * Lists articles of a specified type of publication (Journal or Conference) within a given period.
+     *
+     * @param Pub The type of publication to search for (e.g., "Journal" or "Conference").
+     * @param Year1 The starting year of the period.
+     * @param Year2 The ending year of the period.
+     */
     public void listTypeOfPubInAPeriod(String Pub, int Year1, int Year2) {
         boolean found = false;
 
-        // Ciclo for para percorrer todos os artigos no grafo
+        // ciclo for para percorrer todos os artigos no grafo
         for (Integer idArticle : articlesInGraph.keys()) {
             Article article = articlesInGraph.get(idArticle);
 
-            // Verifica com o instanceof se o artigo foi publicado num Journal ou numa Conferência
+            // verifica com o instanceof se o artigo foi publicado num Journal ou numa Conferência
             if (article.getPub() instanceof PubJournal) {
                 PubJournal pubJournal = (PubJournal) article.getPub();
                 if (pubJournal.getNome().equals(Pub)) {
-                    // Verifica se a publicação foi no intervalo esperado
+                    // verifica o intervalo
                     if (article.getAno() >= Year1 && article.getAno() <= Year2) {
                         System.out.println("Article found: " + article.getTitulo());
                         found = true;
@@ -91,12 +110,16 @@ public class ArticleWeightedDigraph {
             }
         }
 
-        // Verificação caso não tenha encontrado nenhum artigo
         if (!found) {
             System.out.println("No Article found in the specified period");
         }
     }
 
+    /**
+     * Searches for self-citations in the graph for a given article.
+     *
+     * @param article The article for which self-citations are to be searched.
+     */
     public void searchSelfCitations(Article article) {
         System.out.println("Article Title: " + article.getTitulo());
         System.out.println("Authors:");
@@ -113,16 +136,15 @@ public class ArticleWeightedDigraph {
             // obtem artigos referenciados
             Article referencedArticle = articlesInGraph.get(edge.to());
 
-            // Obtém os autores do artigo referenciado
+            // obtém os autores do artigo referenciado
             Iterable<Author> authorsOfReferencedArticle = referencedArticle.getAutores();
 
-            // Verifica se há autores em comum
+            // verifica se há autores em comum
             for (Author authorOfOrigin : authorsOfOriginArticle) {
                 for (Author authorOfReferenced : authorsOfReferencedArticle) {
                     if (authorOfOrigin.equals(authorOfReferenced)) {
-                        // Se houver autores em comum, imprime a self citation
                         System.out.println("- " + referencedArticle.getTitulo());
-                        break; // Uma vez que detectamos uma self citation, não é necessário continuar a verificação.
+                        break;
                     }
                 }
             }
@@ -130,7 +152,12 @@ public class ArticleWeightedDigraph {
         System.out.println();
     }
 
-    //código que calcula o shortest path usando o algoritmo de Dijkstra
+    /**
+     * Finds the shortest path between two articles in the graph.
+     *
+     * @param a1 The first article.
+     * @param a2 The second article.
+     */
     public void shortestPathBetweenArticles(Article a1, Article a2) {
         int s = a1.getArticleId();
         int t = a2.getArticleId();
@@ -144,23 +171,31 @@ public class ArticleWeightedDigraph {
             System.out.println("No path found");
         }
     }
+
+    /**
+     * Lists citations made by articles published in a specific journal within a given period.
+     *
+     * @param Journal The name of the journal to search for citations.
+     * @param Year1 The starting year of the period.
+     * @param Year2 The ending year of the period.
+     */
     public void listCitationsbyJournalAndPeriod(String Journal, int Year1, int Year2) {
         boolean found = false;
 
-        // Percorre artigos do grafo
+        // percorre grafo
         for (Integer ArticleID : articlesInGraph.keys()) {
             Article article = articlesInGraph.get(ArticleID);
 
-            // Verifica se artigo pertence a journal
+            // verifica se artigo pertence a journal
             if (article.getPub() instanceof PubJournal) {
                 PubJournal pubJournal = (PubJournal) article.getPub();
                 if (pubJournal.getNome().equals(Journal)) {
-                    // Percorre as arestas que saem do artigo (citações feitas por ele)
+                    // percorre as arestas que saem do artigo (citações feitas por ele)
                     for (DirectedEdge edge : G.adj(ArticleID)) {
                         int citedArticleId = edge.to();
                         Article citedArticle = articlesInGraph.get(citedArticleId);
 
-                        // Verifica se a citação está no intervalo temporal
+                        // verifica intervalo
                         if (citedArticle.getAno() >= Year1 && citedArticle.getAno() <= Year2) {
                             System.out.println("Citation found:");
                             System.out.println("Article that cites: " + article.getTitulo());
@@ -174,20 +209,24 @@ public class ArticleWeightedDigraph {
             }
         }
 
-        // Verifica se encontrou citações que correspondam aos critérios
         if (!found) {
             System.out.println("Nenhuma citação encontrada para o Journal especificado no período temporal fornecido.");
         }
     }
 
+    /**
+     * Saves the article graph to a file.
+     *
+     * @param filename The name of the file to save the graph to.
+     */
     public void saveArticleGraphToFile(String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            // Guardar artigos no ficheiro
+            // guardar artigos no ficheiro
             for (int id : articlesInGraph.keys()) {
                 Article article = articlesInGraph.get(id);
                 writer.write(String.format("Node:%d,%s\n", id, article.toString()));
             }
-            // Guardar arestas no ficheiro
+            // guardar arestas no ficheiro
             for (DirectedEdge e : G.edges()) {
                 writer.write(String.format("Article %d references Article %d Nº of references: %d\n", e.from(), e.to(), (int)e.weight()));
             }
@@ -196,6 +235,11 @@ public class ArticleWeightedDigraph {
         }
     }
 
+    /**
+     * Adds input data from a file to the article graph.
+     *
+     * @param filename The name of the file containing the input data.
+     */
     public void addInputToArticleGraph(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -250,12 +294,24 @@ public class ArticleWeightedDigraph {
 
         System.out.println("articlesInGraph size: " + articlesInGraph.size());
     }
+
+    /**
+     * Checks if the directed graph is strongly connected.
+     *
+     * @return true if the graph is strongly connected, false otherwise.
+     */
     public boolean isStronglyConnected() {
         Digraph digraph = convertToDigraph(G);
         KosarajuSharirSCC scc = new KosarajuSharirSCC(digraph);
         return scc.count() == 1;
     }
 
+    /**
+     * Converts an EdgeWeightedDigraph to a Digraph.
+     *
+     * @param G The EdgeWeightedDigraph to be converted.
+     * @return The converted Digraph.
+     */
     private Digraph convertToDigraph(EdgeWeightedDigraph G) {
         Digraph digraph = new Digraph(G.V());
         for (int v = 0; v < G.V(); v++) {
@@ -265,6 +321,45 @@ public class ArticleWeightedDigraph {
         }
         return digraph;
     }
+
+
+    /**
+     * Writes article data from the graph to a binary file.
+     *
+     * @param filepath The file path where the binary data will be written.
+     */
+    public void readBinFromArticleGraph(String filepath) {
+        Logger.getLogger(ArticleWeightedDigraph.class.getName()).log(Level.INFO, "readBinFromArticleGraph(): write to text file " + filepath);
+        try (DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(filepath)))) {
+            for (Integer id : articlesInGraph.keys()) {
+                Article article = articlesInGraph.get(id);
+                dos.writeBytes(article.toString());
+            }
+        } catch (IOException e) {
+            Logger.getLogger(ArticleWeightedDigraph.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    /**
+     * Reads binary data from a file and processes it for input to the article graph.
+     *
+     * @param filepath The file path from which binary data will be read.
+     */
+    public static void inputBinToArticleGraph(String filepath) {
+        Logger.getLogger(ArticleWeightedDigraph.class.getName()).log(Level.INFO, "inputBinToArticleGraph(): read from bin file " + filepath);
+        try (DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(filepath)))) {
+
+            int size = dis.readInt();
+            System.out.println("FileBinOutputStreamApp - inputBinToArticleGraph(): size = " + size);
+            for (int i = 0; i < size; i++) {
+                double d = dis.readDouble();
+                System.out.println("FileBinOutputStreamApp - inputBinToArticleGraph(): data[" + i + "] = " + d);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(Thread.currentThread().getName()).log(Level.INFO, e.toString());
+        }
+    }
+
 
 }
 
