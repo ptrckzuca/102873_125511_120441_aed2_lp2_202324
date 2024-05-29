@@ -16,8 +16,6 @@ public class Author extends Person  {
   private String email;
 
   public Author() {
-
-
   }
 
   public Author(String idNumber, String name, String address, Date birth, String email, String orcid, String filiacao, int cienciaID, int googleScholarID, String nomeCientifico) {
@@ -30,7 +28,7 @@ public class Author extends Person  {
     this.nomeCientifico = nomeCientifico;
   }
 
-  public Author(int id, String idNumber, String name, String address, java.util.Date birth, String orcid, int cienciaID, String filiacao, int googleScholarID, String nomeCientifico, String email) {
+  public Author(int id, String idNumber, String name, String address, Date birth, String orcid, int cienciaID, String filiacao, int googleScholarID, String nomeCientifico, String email) {
   }
 
   public String getEmail() {

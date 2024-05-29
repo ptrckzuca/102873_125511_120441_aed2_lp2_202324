@@ -186,32 +186,30 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         this.articlesByYear.put(key, article);
         //put(key, article);
     }
-
-
     public ArrayList<Article> getArticlesByAuthorAndYears(Author author, int startYear, int endYear) {
         ArrayList<Article> authorArticles = new ArrayList<>();
 
-        for (String title : this.articles.keys()) {
-            Article article = this.articles.get(title);
-            if (article.getAutores().contains(author) && article.getAno() >= startYear && article.getAno() <= endYear) {
+        for (int year : articlesByYear.keys(startYear, endYear)) {
+            Article article = articlesByYear.get(year);
+            if (article.getAutores().contains(author)) {
                 authorArticles.add(article);
             }
         }
-        System.out.println("Articles by author " + author.getNomeCientifico() + " between " + startYear + " and " + endYear + ": " + authorArticles.size());
+
+        System.out.println("Articles by author " + author.getName() + " between " + startYear + " and " + endYear + ": " + authorArticles.size());
         return authorArticles;
     }
 
     public ArrayList<Article> getDownloadStatusByArticleAndYears(int startYear, int endYear) {
         ArrayList<Article> downloadedArticles = new ArrayList<>();
 
-        for (String title : this.articles.keys()) {
-            Article article = this.articles.get(title);
-            if (article.getAno() >= startYear && article.getAno() <= endYear) {
-                if (article.getNumDownloads() > 0) {
-                    downloadedArticles.add(article);
-                }
+        for (int year : articlesByYear.keys(startYear, endYear)) {
+            Article article = articlesByYear.get(year);
+            if (article.getAno() >= startYear && article.getAno() <= endYear && article.getNumDownloads() > 0) {
+                downloadedArticles.add(article);
             }
         }
+
         System.out.println("Download status of articles between " + startYear + " and " + endYear + ": " + downloadedArticles.size());
         return downloadedArticles;
     }
@@ -344,30 +342,15 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
     }
 
     static void testSearchArticlePerPeriod(DB db) {
-        /*
-        db.insertArticleByYear(db.articles.get("Artigo 1"));
-        db.insertArticleByYear(db.articles.get("Artigo 2"));
-        db.insertArticleByYear(db.articles.get("Artigo 3"));
-        db.insertArticleByYear(db.articles.get("Artigo 4"));
-        db.insertArticleByYear(db.articles.get("Artigo 5"));
-        db.insertArticleByYear(db.articles.get("Artigo 6"));
-        db.insertArticleByYear(db.articles.get("Artigo 7"));
-
-         */
-
-        //db.listArticles();
-
-        //db.getArticlesByAuthorAndYears(db.authors.get(2), 2000, 2025).forEach(System.out::println);
-        db.getDownloadStatusByArticleAndYears(2000, 2024).forEach(System.out::println);
+        //db.getArticlesByAuthorAndYears(db.authors.get(5), 2000, 2025).forEach(System.out::println);
+        //db.getDownloadStatusByArticleAndYears(2000, 2014).forEach(System.out::println);
         //db.getTop3ArticlesByLikes(2000, 2024);
-
-
     }
 
-    static void testArticleWeightedDigraph(DB db){
+    static void testArticleWeightedDigraph(DB db) {
 
         ArticleWeightedDigraph awd = new ArticleWeightedDigraph(8);
-          /*
+/*
         awd.addArticleToGraph(db.articles.get("Artigo 1"));
         awd.addArticleToGraph(db.articles.get("Artigo 2"));
         awd.addArticleToGraph(db.articles.get("Artigo 3"));
@@ -393,31 +376,24 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
 
         awd.addEdge(db.articles.get("Artigo 4"), db.articles.get("Artigo 5"), 7);
         awd.addEdge(db.articles.get("Artigo 4"), db.articles.get("Artigo 6"), 2);
-
-         */
-
-
+    */
         //awd.listTypeOfPubInAPeriod("IEEE Transactions on Pattern Analysis and Machine Intelligence", 2024, 2025);
-
-
         //awd.shortestPathBetweenArticles(db.articles.get("Artigo 6"), db.articles.get("Artigo 7"));
-
         //awd.searchArticle(db.articles.get("Artigo 2"));
-
         //awd.printVerticeConnections(db.articles.get("Artigo 4"));
-
         //awd.searchSelfCitations(db.articles.get("Artigo 6"));
-
         //awd.listarCitacoesPorJournalEPorPeriodo("IEEE Transactions on Pattern Analysis and Machine Intelligence", 2000, 2025);
 
         awd.addInputToArticleGraph("articleInputGraph.txt");
         awd.saveArticleGraphToFile("articleGraph.txt");
 
+        System.out.println("Is the graph strongly connected? " + awd.isStronglyConnected());
+
     }
 
-    static void testAuthorWeightedGraph(DB db){
+    static void testAuthorWeightedGraph(DB db) {
         AuthorWeightedGraph awg = new AuthorWeightedGraph(6);
-        /*
+
         awg.addAuthorToGraph(db.authors.get(1));
         awg.addAuthorToGraph(db.authors.get(2));
         awg.addAuthorToGraph(db.authors.get(3));
@@ -432,23 +408,19 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         awg.addEdge(db.authors.get(2), db.authors.get(4), 3);
         awg.addEdge(db.authors.get(2), db.authors.get(5), 2);
         awg.addEdge(db.authors.get(3), db.authors.get(4), 3);
-        //awg.addEdge(db.authors.get(3), db.authors.get(5), 0);
+        awg.addEdge(db.authors.get(3), db.authors.get(5), 0);
         awg.addEdge(db.authors.get(4), db.authors.get(5), 1);
-*/
-
 
         //awg.countCollaborators(db.authors.get(5));
 
         //awg.printVerticeConnections(db.authors.get(3));
         //awg.searchAuthor(db.authors.get(1));
 
-        awg.addInputToAuthorGraph("authorInputGraph.txt");
-        awg.saveAuthorGraphToFile("authorGraph.txt");
-
-
-
+        //awg.addInputToAuthorGraph("authorInputGraph.txt");
+        //awg.saveAuthorGraphToFile("authorGraph.txt");
+        awg.fileTextOutputStream("authorGraphBin.bin");
+        //System.out.println("Is the graph connected? " + awg.isConnected());
     }
-
 
     public static void main(String[] args) {
         DB db = new DB();
@@ -462,17 +434,13 @@ public class DB implements DBManageAuthorsI, DBManageArticlesI, DBManagePublicat
         System.out.println("\nmain(): ============= listArticles()...");
         db.listArticles();*/
 
-
-        //testArticleWeightedDigraph(db);
-        testAuthorWeightedGraph(db);
-
+       //testArticleWeightedDigraph(db);
+        // testAuthorWeightedGraph(db);
 
         //testAuthor(db);
         //testArticle(db);
         //testPublication(db);
         //testSearchArticlePerPeriod(db);
-
-
     }
 
 }

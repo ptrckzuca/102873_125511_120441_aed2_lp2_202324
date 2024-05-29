@@ -29,7 +29,6 @@ public class Article{
         this.numViews = numViews;
         this.numLikes = numLikes;
         this.pub = pub;
-        //this.referencias = referencias;
         this.autores = autores;
     }
 

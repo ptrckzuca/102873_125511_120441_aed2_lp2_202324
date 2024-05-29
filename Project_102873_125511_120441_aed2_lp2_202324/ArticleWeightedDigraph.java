@@ -4,9 +4,8 @@ package Project_102873_125511_120441_aed2_lp2_202324;
 import edu.princeton.cs.algs4.*;
 
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 
 public class ArticleWeightedDigraph {
     EdgeWeightedDigraph G;
@@ -18,6 +17,9 @@ public class ArticleWeightedDigraph {
 
     public void addArticleToGraph(Article a) {
         articlesInGraph.put(a.getArticleId(), a);
+    }
+    public void addArticle(Article a, int id) {
+        articlesInGraph.put(id, a);
     }
 
     public void searchArticle(Article a) {
@@ -44,6 +46,9 @@ public class ArticleWeightedDigraph {
 
     public void addEdge(Article a1, Article a2, double weight) {
         G.addEdge(new DirectedEdge(a1.getArticleId(), a2.getArticleId(), weight));
+
+    }public void add_Edge(int v, int w, double weight) {
+        G.addEdge(new DirectedEdge(v, w, weight));
     }
 
     public void printVerticeConnections(Article a) {
@@ -192,31 +197,74 @@ public class ArticleWeightedDigraph {
     }
 
     public void addInputToArticleGraph(String filename) {
-        In in = new In(filename);
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
 
-        // lê vertices e arestas
-        int V = in.readInt();
-        int E = in.readInt();
+            // lê vertices e arestas
+            line = br.readLine();
+            if (line != null) {
+                String[] parts = line.split(",");
+                int V = Integer.parseInt(parts[0]);
+                int E = Integer.parseInt(parts[1]);
 
-        // lê os artigos (vertices)
-        for (int i = 0; i < V; i++) {
-            int id = in.readInt();
-            String title = in.readLine().trim(); // Lê o restante da linha como título do artigo
-            articlesInGraph.put(id, new Article(id, title));
+                System.out.println("V: " + V); // debug V
+                System.out.println("E: " + E); // debug E
+
+                // lê os artigos (vertices)
+                for (int j = 0; j < V; j++) {
+                    line = br.readLine();
+                    if (line != null) {
+                        parts = line.split(",");
+                        int articleID = Integer.parseInt(parts[0]);
+                        String titulo = parts[1];
+                        int keyWords = Integer.parseInt(parts[2]);
+                        String anAbstract = parts[3];
+                        int ano = Integer.parseInt(parts[4]);
+                        int numDownloads = Integer.parseInt(parts[5]);
+                        int numViews = Integer.parseInt(parts[6]);
+                        int numLikes = Integer.parseInt(parts[7]);
+
+
+                        Article article = new Article(articleID, titulo, keyWords, anAbstract, ano, numDownloads, numViews, numLikes, null, null);
+                        addArticle(article, articleID);
+
+                        System.out.println("Article after adding: " + articlesInGraph.get(articleID)); // debug article
+                    }
+                }
+
+                // lê as arestas e pesos
+                for (int i = 0; i < E; i++) {
+                    line = br.readLine();
+                    if (line != null) {
+                        parts = line.split(",");
+                        int v = Integer.parseInt(parts[0]);
+                        int w = Integer.parseInt(parts[1]);
+                        double weight = Double.parseDouble(parts[2]);
+                        add_Edge(v, w, weight);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-
-        // lê as arestas e pesos
-        for (int i = 0; i < E; i++) {
-            int v = in.readInt();
-            int w = in.readInt();
-            double weight = in.readDouble();
-            DirectedEdge edge = new DirectedEdge(v, w, weight);
-            G.addEdge(edge);
-
-        }
+        System.out.println("articlesInGraph size: " + articlesInGraph.size());
+    }
+    public boolean isStronglyConnected() {
+        Digraph digraph = convertToDigraph(G);
+        KosarajuSharirSCC scc = new KosarajuSharirSCC(digraph);
+        return scc.count() == 1;
     }
 
+    private Digraph convertToDigraph(EdgeWeightedDigraph G) {
+        Digraph digraph = new Digraph(G.V());
+        for (int v = 0; v < G.V(); v++) {
+            for (DirectedEdge e : G.adj(v)) {
+                digraph.addEdge(e.from(), e.to());
+            }
+        }
+        return digraph;
+    }
 
 }
 
