@@ -3,7 +3,6 @@
 ## Alunos: 
 - **Patrick Silva** (2022102873);
 - **Frederico Soliz** (2022125511);
-- **João Nunes** (2022120441);
 
 Objetivos a serem cumpridos.
 ## MILESTONE 1:
@@ -25,11 +24,8 @@ Objetivos a serem cumpridos.
 - [x] R12; 
 - [x] R13;
 
-
-
-- **Countdown até entrega: (dias)**;
-- **Data de entrega do projeto:**;
-- **Data de apresentação do projeto:**;
+- **Data de entrega do projeto:29/05/2024;
+- **Data de apresentação do projeto:29/05/2024;
 
 
 
